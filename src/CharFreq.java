@@ -23,8 +23,9 @@ public class CharFreq {
 
         global = new HashMap<Character, Long>(); //ГЛОБОЛЬНЫЙ КОНТЕЙНЕР
         mergeMap(global, symbolFreq(s));
+        global.entrySet().stream().sorted(Map.Entry.<Character, Long>comparingByValue())
+                .forEach(System.out::println); // или любой другой конечный метод
 
-        System.out.println(global);
 
     }
 
