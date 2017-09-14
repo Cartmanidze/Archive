@@ -10,22 +10,20 @@ import java.util.List;
 public class FileReader {
     String fileName;
     List<String> lines;
+    String string;
 
     public FileReader(String fileName) throws IOException {
 
         this.fileName = fileName;
         lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
 
-        int i = 0;
-        for(String line: lines){
-            /*
-            *
-            * */
+        for(String line: lines){                    //запоминаем данные из файла
+            string += line;
         }
 
     }
 
-    public List<String> getLines() {
-        return lines;
+    public String getString() {                 // и возвращаем их
+        return string;
     }
 }
