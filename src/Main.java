@@ -9,7 +9,7 @@ public class Main {
         FileReader fileReader;
 
         try {
-            fileReader = new FileReader("123.txt");
+            fileReader = new FileReader("123.txt"); // TEST
         } catch (IOException e) {
             e.printStackTrace();
         }
