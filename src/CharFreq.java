@@ -28,24 +28,24 @@ public class CharFreq {
 
     }
 
-    private static void mergeMap(Map<Character, Long> target, Map<Character, Long> src) {
-        for (Character c : src.keySet()) {
-            if (target.containsKey(c)) {
+    private static void mergeMap(Map<Character, Long> target, Map<Character, Long> src) { //метод заполнения глобального МЭП
+        for (Character c : src.keySet()) {          //пробегаем по всем символам что есть в срц
+            if (target.containsKey(c)) {            //если встречается такойже символ прибавляем к нему значение символа срц
                 target.put(c, target.get(c) + src.get(c));
-            } else {
+            } else {                                // иначе оставляем все как есть
                 target.put(c, src.get(c));
             }
         }
     }
 
-    public static Map<Character, Long> symbolFreq(String s) {
+    public static Map<Character, Long> symbolFreq(String s) {           //метод счета частоты символов
         Map<Character, Long> map = new HashMap<Character, Long>();
         char[] cars = s.toCharArray();
-        for (char c : cars) {
-            if (map.containsKey(c)) {
+        for (char c : cars) {                               //пробегаем по массиву символов
+            if (map.containsKey(c)) {                       //если встречается символ из МЭП добовляем к его значению 1
                 map.put(c, map.get(c) + 1);
             } else {
-                map.put(c, 1L);
+                map.put(c, 1L);                             // если встречается первый раз устанавливаем значение 1
             }
         }
         return map;
