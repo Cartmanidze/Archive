@@ -3,8 +3,11 @@
  */
 public class Main {
     public static void main(String[]args)
-    {
-        System.out.println("Cartmanidze");
+    FileReader fileReader;
 
-    }
+        try {
+            fileReader = new FileReader("123.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 }
