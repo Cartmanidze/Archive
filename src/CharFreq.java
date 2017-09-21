@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,10 @@ public class CharFreq {
         global = new HashMap<Character, Long>(); //ГЛОБОЛЬНЫЙ КОНТЕЙНЕР
         mergeMap(global, symbolFreq(s));
          //вывод по возрастанию
+
+        global.entrySet().stream().sorted(Map.Entry.<Character, Long>comparingByValue()).toArray();
+
+        new Compresion(global);
 
 
     }
