@@ -12,7 +12,7 @@ public class FileReader {
     List<String> lines;
     String string;
 
-    public FileReader(String fileName) throws IOException {
+    public FileReader(String fileName) throws IOException {//
 
         this.fileName = fileName;
         lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);

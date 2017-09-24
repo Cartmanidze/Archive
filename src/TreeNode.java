@@ -4,7 +4,7 @@
 public class TreeNode {
 
     public char symbol;
-    public TreeNode parent;
+    public TreeNode parent;//
     public TreeNode leftChild;
     public TreeNode rightChild;
     public int weight;
