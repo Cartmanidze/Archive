@@ -64,5 +64,5 @@ public class CharFreq {
 
     public Map<Character, Long> getGlobal() {
         return global;
-    }
+    }//
 }

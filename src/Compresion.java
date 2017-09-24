@@ -80,7 +80,7 @@ public class Compresion {
 
     void print(TreeNode node, String context){ // PRINT
         if (node.leftChild == null){
-            System.out.println(node.symbol + ";" + context);
+            System.out.println(node.symbol + ";" + context);//
             return;
         }
         if (node.leftChild!= null){
