@@ -1,7 +1,6 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Stanislav on 14.09.2017.
@@ -10,6 +9,8 @@ public class CharFreq {
 
     Map<Character, Long> global;
     FileReader fileReader;
+
+     public List<Map.Entry <Character, Long>> list;
 
     public CharFreq(/*String s*/) {
 
@@ -20,15 +21,20 @@ public class CharFreq {
         }
         String s = fileReader.getString();
 
-        System.out.println(s);
 
         global = new HashMap<Character, Long>(); //ГЛОБОЛЬНЫЙ КОНТЕЙНЕР
         mergeMap(global, symbolFreq(s));
          //вывод по возрастанию
 
-        global.entrySet().stream().sorted(Map.Entry.<Character, Long>comparingByValue()).toArray();
+        //global.entrySet().stream().sorted(Map.Entry.<Character, Long>comparingByValue()).toArray();
 
-        new Compresion(global);
+        list = global.entrySet().stream().collect(Collectors.toList());
+
+
+
+        //System.out.println( list );
+
+        //new Compresion();
 
 
     }
