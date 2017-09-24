@@ -1,99 +1,53 @@
-import javax.management.ObjectName;
+import java.lang.reflect.Array;
 import java.util.*;
-
+import java.util.stream.Stream;
 
 /**
  * Created by Stanislav on 15.09.2017.
  */
 public class Compresion {
 
-    List<Map.Entry <Character, Long>> list;
-    CharFreq charFreq;
-
-
+    static Map<Character, Long> global;
+    static CharFreq charFreq;
+    int n = 0;
 
     public Compresion() {//класс будет отвечать за сжатие
 
-        charFreq = new CharFreq();
 
-        list = charFreq.list;
-
-
-        List<TreeNode> treeList= new ArrayList<TreeNode>();
-
-        for (int i = 0; i < list.size(); i++){
-
-            TreeNode node = new TreeNode();
-            node.symbol = list.get(i).getKey();
-            node.weight = Math.toIntExact(list.get(i).getValue());
-            treeList.add(node);
-        }
+       Iterator<Map.Entry<Character, Long>> itr1 = reverse().iterator();
+       Iterator<Map.Entry<Character, Long>> itr2 = reverse().iterator();
+           while (itr1.hasNext()) {
+               Map.Entry<Character, Long> pair1 = itr1.next();
+                Character key1 = pair1.getKey();
+                Long value1 = pair1.getValue();
 
 
-        Collections.sort(treeList, new Comparator<TreeNode>() {
-                    @Override
-                    public int compare(TreeNode o1, TreeNode o2) {
-                        if (o1.weight == o2.weight) return 0;
-                        else if (o1.weight > o2.weight) return 1;
-                        else return -1;
-                    }
-                });
+                while (itr2.hasNext()) {
+                    Map.Entry<Character, Long> pair2 = itr2.next();
+                    Character key2 = pair2.getKey();
+                    Long value2 = pair2.getValue();
+
+                   if (value1.equals(value2))n++;
+                   if(n>1)
+                        System.out.println(value2);
 
 
 
-
-        while (treeList.size() > 1) {
-            Collections.sort(treeList, new Comparator<TreeNode>() {
-                @Override
-                public int compare(TreeNode o1, TreeNode o2) {
-                    if (o1.weight == o2.weight) return 0;
-                    else if (o1.weight > o2.weight) return 1;
-                    else return -1;
                 }
-            });
 
-            for(int i =0 ; i<treeList.size(); i++)
-            {
-                System.out.println(treeList.get(i).symbol+" "+treeList.get(i).weight);
+           }
+       }
 
-            }
-            System.out.println("        ");
+        public static Stream<Map.Entry<Character, Long>> reverse () {
 
-            TreeNode parent = new TreeNode();
-            parent.leftChild = treeList.get(0);
-            parent.rightChild = treeList.get(1);
-            parent.weight = parent.leftChild.weight + parent.rightChild.weight;
-            treeList.remove(0);
-            treeList.remove(0);
-            treeList.add(parent);
-            System.out.println(treeList.size());
-        }
-        System.out.println(treeList);
-        System.out.println("-------------------------------------------------------------------------------------");
+            charFreq = new CharFreq();
 
-        print(treeList.get(0), "");
-        System.out.println(treeList.get(0).leftChild);
+            global = charFreq.getGlobal();
 
+           return global.entrySet().stream().sorted(Map.Entry.<Character, Long>comparingByValue()); //Сортировку пренес сюда
+
+
+       }
 
     }
-
-
-    void print(TreeNode node, String context){
-        if (node.leftChild == null){
-            System.out.println(node.symbol + ";" + context);
-            return;
-        }
-        if (node.leftChild!= null){
-            print(node.leftChild, context + "0");
-            print(node.rightChild, context + "1");
-        }
-
-    }
-
-
-
-}
-
-
-
 
