@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -25,5 +26,16 @@ public class FileReader {
 
     public String getString() {                 // и возвращаем их
         return string;
+    }
+
+    public void writer(String text) throws IOException{
+
+        FileWriter writer = new FileWriter(fileName);
+
+        writer.write(text);
+        writer.append('\n');
+
+        writer.flush();
+
     }
 }

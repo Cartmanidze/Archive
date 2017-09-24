@@ -1,4 +1,5 @@
 import javax.management.ObjectName;
+import java.io.IOException;
 import java.util.*;
 
 
@@ -9,14 +10,17 @@ public class Compresion {
 
     List<Map.Entry <Character, Long>> list;
     CharFreq charFreq;
+    FileReader fileWriter;
 
 
 
-    public Compresion() {//класс будет отвечать за сжатие
+    public Compresion() throws IOException {//класс будет отвечать за сжатие
 
         charFreq = new CharFreq();
 
         list = charFreq.list;
+
+        fileWriter = new FileReader("outPut.txt");
 
 
         List<TreeNode> treeList= new ArrayList<TreeNode>();
@@ -78,9 +82,10 @@ public class Compresion {
     }
 
 
-    void print(TreeNode node, String context){ // PRINT
+    void print(TreeNode node, String context) throws IOException { // PRINT
         if (node.leftChild == null){
-            System.out.println(node.symbol + ";" + context);//
+           //fileWriter.writer(node.symbol + ";" + context);//
+            System.out.println(node.symbol + ";" + context);
             return;
         }
         if (node.leftChild!= null){
