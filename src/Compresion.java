@@ -12,13 +12,15 @@ public class Compresion {
     CharFreq charFreq;
     FileReader fileWriter;
 
-
+    public Map<Character, String> charCods;
 
     public Compresion() throws IOException {//класс будет отвечать за сжатие
 
+        charCods = new HashMap<Character, String>();
         charFreq = new CharFreq();
-
         list = charFreq.list;
+
+        Set<Map.Entry<Character, String>> entrySet = charCods.entrySet();
 
         fileWriter = new FileReader("outPut.txt");
 
@@ -56,12 +58,7 @@ public class Compresion {
                 }
             });
 
-            for(int i =0 ; i<treeList.size(); i++)
-            {
-                System.out.println(treeList.get(i).symbol+" "+treeList.get(i).weight);
 
-            }
-            System.out.println("        ");
 
             TreeNode parent = new TreeNode();
             parent.leftChild = treeList.get(0);
@@ -70,27 +67,48 @@ public class Compresion {
             treeList.remove(0);
             treeList.remove(0);
             treeList.add(parent);
-            System.out.println(treeList.size());
         }
-        System.out.println(treeList);
-        System.out.println("-------------------------------------------------------------------------------------");
+
 
         print(treeList.get(0), "");
-        System.out.println(treeList.get(0).leftChild);
+        System.out.print(charCods);
 
+        textGen(entrySet, CharFreq.text);
 
     }
 
 
     void print(TreeNode node, String context) throws IOException { // PRINT
         if (node.leftChild == null){
-           fileWriter.writer(node.symbol + ";" + context);//
-            System.out.println(node.symbol + ";" + context);
+           //fileWriter.writer(node.symbol + ";" + context);
+
+            charCods.put(node.symbol, context);
+
             return;
         }
         if (node.leftChild!= null){
             print(node.leftChild, context + "0");
             print(node.rightChild, context + "1");
+        }
+
+    }
+
+    void textGen(Set<Map.Entry<Character, String>> set, String s) {
+
+        char[] chars = s.toCharArray();
+        System.out.println(chars[0]);
+        for (char c : chars) {
+            for (Map.Entry<Character, String> pair : set) {
+                if (c == pair.getKey()) {
+                    try {
+                        fileWriter.writer(pair.getValue() + " ");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+
         }
 
     }

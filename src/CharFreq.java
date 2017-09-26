@@ -10,8 +10,9 @@ import java.util.stream.Collectors;
 public class CharFreq {
 
     Map<Character, Long> global;
-    Map<Character, Long> globalSorted;
     FileReader fileReader;
+
+    public static String text;
 
     public List<Map.Entry <Character, Long>> list;
 
@@ -22,11 +23,11 @@ public class CharFreq {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String s = fileReader.getString();
+        text = fileReader.getString();
 
 
         global = new HashMap<Character, Long>(); //ГЛОБОЛЬНЫЙ КОНТЕЙНЕР
-        mergeMap(global, symbolFreq(s));
+        mergeMap(global, symbolFreq(text));
         //вывод по возрастанию
 
         //global.entrySet().stream().sorted(Map.Entry.<Character, Long>comparingByValue()).toArray();

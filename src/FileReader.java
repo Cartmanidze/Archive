@@ -33,7 +33,7 @@ public class FileReader {
         FileWriter writer = new FileWriter(fileName, true);
 
         writer.write(text);
-        writer.append('\n');
+        //writer.append('\n');
 
         writer.flush();
 
