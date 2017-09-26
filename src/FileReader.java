@@ -30,7 +30,7 @@ public class FileReader {
 
     public void writer(String text) throws IOException{
 
-        FileWriter writer = new FileWriter(fileName);
+        FileWriter writer = new FileWriter(fileName, true);
 
         writer.write(text);
         writer.append('\n');

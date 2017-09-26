@@ -84,7 +84,7 @@ public class Compresion {
 
     void print(TreeNode node, String context) throws IOException { // PRINT
         if (node.leftChild == null){
-           //fileWriter.writer(node.symbol + ";" + context);//
+           fileWriter.writer(node.symbol + ";" + context);//
             System.out.println(node.symbol + ";" + context);
             return;
         }
