@@ -8,8 +8,10 @@ public class Main {
     {
         try {
             new Compresion();//
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }

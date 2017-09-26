@@ -12,7 +12,7 @@ public class Compresion {
     CharFreq charFreq;
     FileReader fileWriter;
 
-    public Map<Character, String> charCods;
+    public static Map<Character, String> charCods;
 
     public Compresion() throws IOException {//класс будет отвечать за сжатие
 
@@ -71,7 +71,8 @@ public class Compresion {
 
 
         print(treeList.get(0), "");
-        System.out.print(charCods);
+        //System.out.print(charCods);
+        new Uncompresion();
 
         textGen(entrySet, CharFreq.text);
 
@@ -96,16 +97,18 @@ public class Compresion {
     void textGen(Set<Map.Entry<Character, String>> set, String s) {
 
         char[] chars = s.toCharArray();
-        System.out.println(chars[0]);
+
         for (char c : chars) {
             for (Map.Entry<Character, String> pair : set) {
                 if (c == pair.getKey()) {
+
                     try {
-                        fileWriter.writer(pair.getValue() + " ");
-                    } catch (IOException e) {
+                        //fileWriter.writer(pair.getValue() + " ");
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
+
             }
 
 
