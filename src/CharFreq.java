@@ -19,7 +19,7 @@ public class CharFreq {
     public CharFreq(/*String s*/) {
 
         try {
-            fileReader = new FileReader("123.txt");
+            fileReader = new FileReader("123.txt", 1);
         } catch (IOException e) {
             e.printStackTrace();
         }

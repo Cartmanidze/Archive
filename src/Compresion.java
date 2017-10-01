@@ -22,7 +22,7 @@ public class Compresion {
 
         Set<Map.Entry<Character, String>> entrySet = charCods.entrySet();
 
-        fileWriter = new FileReader("outPut.txt");
+        fileWriter = new FileReader("outPut.txt", 2);
 
 
         List<TreeNode> treeList= new ArrayList<TreeNode>();
@@ -34,16 +34,6 @@ public class Compresion {
             node.weight = Math.toIntExact(list.get(i).getValue());
             treeList.add(node);
         }
-
-
-        Collections.sort(treeList, new Comparator<TreeNode>() {
-                    @Override
-                    public int compare(TreeNode o1, TreeNode o2) {
-                        if (o1.weight == o2.weight) return 0;
-                        else if (o1.weight > o2.weight) return 1;
-                        else return -1;
-                    }
-                });
 
 
 
@@ -96,35 +86,30 @@ public class Compresion {
 
     void textGen(Set<Map.Entry<Character, String>> set, String s) {
 
-        byte buffer = -54;
+        byte buffer = 0;
+        /*String sTest = "0110101010101";
+        char[] chTest = sTest.toCharArray();
 
+        for (char ch: chTest){
 
-       /* buffer = (byte) ((buffer << 1) + 0);
-        buffer = (byte) ((buffer << 1) + 1);
-        buffer = (byte) ((buffer << 1) + 0);
-        buffer = (byte) ((buffer << 1) + 0);
-        buffer = (byte) ((buffer << 1) + 1);
-        buffer = (byte) ((buffer << 1) + 0);
-        buffer = (byte) ((buffer << 1) + 0);
-        buffer = (byte) ((buffer << 1) + 1);
-        buffer = (byte) ((buffer << 1) + 1);
-        buffer = (byte) ((buffer << 1) + 0);
-        buffer = (byte) ((buffer << 1) + 0);
-        buffer = (byte) ((buffer << 1) + 1);
-        buffer = (byte) ((buffer << 1) + 1);
-        buffer = (byte) ((buffer << 1) + 1);
-        buffer = (byte) ((buffer << 1) + 1);
-        buffer = (byte) ((buffer << 1) + 1);
-        buffer = (byte) ((buffer << 1) + 1);
-        buffer = (byte) ((buffer << 1) + 0);*/
+            buffer = (byte) ((buffer << 1) + (('0' == ch) ? 0 : 1));
+            i++;
+            if (i == 7){
+                System.out.println(buffer + "Cikl");
+                System.out.println(Integer.toBinaryString(buffer));
+                buffer = 0;
+                i = 0;
+            }
 
-        System.out.println(buffer);
+        }
+        System.out.println(buffer+ "posle");
+
         System.out.println(Integer.toBinaryString(buffer));
         if (buffer < 0){
             System.out.println("YAAA");
-        }
+        }*/
 
-
+        int i = 0;
 
         char[] chars = s.toCharArray();
         char[] charsTemp;
@@ -135,15 +120,28 @@ public class Compresion {
             for (Map.Entry<Character, String> pair : set) {
                 if (c == pair.getKey()) {
                     charsTemp = pair.getValue().toCharArray();
-                    for (int i = 0; i < charsTemp.length; i++){
+                    for (char chT: charsTemp){
 
-                        buffer = (byte) ((buffer << 1) + (('0' == charsTemp[i]) ? 0 : 1));
-                        if (i > 7){
-                            System.out.print(buffer);
+
+                        buffer = (byte) ((buffer << 1) + (('0' == chT) ? 0 : 1));
+                        i++;
+                        if (i == 7){
+                            //System.out.print(buffer);
+                            try {
+                                fileWriter.writer(buffer);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             buffer = 0;
+                            i = 0;
                         }
                     }
-                    System.out.print(buffer);
+                    //System.out.print(buffer);
+                    try {
+                        fileWriter.writer(buffer);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     buffer = 0;
                 }
 

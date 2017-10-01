@@ -14,7 +14,7 @@ public class Uncompresion {
 
     public Uncompresion() throws IOException {
 
-        fileReader = new FileReader("output.txt");
+        fileReader = new FileReader("output.txt", 1);
         string = fileReader.getString();
         mass = string.split(" ");
 

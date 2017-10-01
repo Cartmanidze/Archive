@@ -1,5 +1,4 @@
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -12,26 +11,30 @@ public class FileReader {
     String fileName;
     List<String> lines;
     String string;
+    FileWriter writer;
 
-    public FileReader(String fileName) throws IOException {//
+    public FileReader(String fileName, int action) throws IOException {//
 
         this.fileName = fileName;
-        lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
+        if (action == 1) {
+            lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
 
-        for(String line: lines){                    //запоминаем данные из файла
-            string += line;
+            for (String line : lines) {                    //запоминаем данные из файла
+                string += line;
+            }
         }
+        if (action == 2){
+            writer  = new FileWriter(fileName, true);
 
+        }
+       //
     }
 
     public String getString() {                 // и возвращаем их
         return string;
     }
 
-    public void writer(String text) throws IOException{
-
-        FileWriter writer = new FileWriter(fileName, true);
-
+    public void writer(byte text) throws IOException{
         writer.write(text);
         //writer.append('\n');
 
