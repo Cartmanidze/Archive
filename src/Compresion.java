@@ -71,8 +71,8 @@ public class Compresion {
 
 
         print(treeList.get(0), "");
-        //System.out.print(charCods);
-        new Uncompresion();
+        System.out.print(charCods);
+       // new Uncompresion();
 
         textGen(entrySet, CharFreq.text);
 
@@ -96,17 +96,55 @@ public class Compresion {
 
     void textGen(Set<Map.Entry<Character, String>> set, String s) {
 
+        byte buffer = -54;
+
+
+       /* buffer = (byte) ((buffer << 1) + 0);
+        buffer = (byte) ((buffer << 1) + 1);
+        buffer = (byte) ((buffer << 1) + 0);
+        buffer = (byte) ((buffer << 1) + 0);
+        buffer = (byte) ((buffer << 1) + 1);
+        buffer = (byte) ((buffer << 1) + 0);
+        buffer = (byte) ((buffer << 1) + 0);
+        buffer = (byte) ((buffer << 1) + 1);
+        buffer = (byte) ((buffer << 1) + 1);
+        buffer = (byte) ((buffer << 1) + 0);
+        buffer = (byte) ((buffer << 1) + 0);
+        buffer = (byte) ((buffer << 1) + 1);
+        buffer = (byte) ((buffer << 1) + 1);
+        buffer = (byte) ((buffer << 1) + 1);
+        buffer = (byte) ((buffer << 1) + 1);
+        buffer = (byte) ((buffer << 1) + 1);
+        buffer = (byte) ((buffer << 1) + 1);
+        buffer = (byte) ((buffer << 1) + 0);*/
+
+        System.out.println(buffer);
+        System.out.println(Integer.toBinaryString(buffer));
+        if (buffer < 0){
+            System.out.println("YAAA");
+        }
+
+
+
         char[] chars = s.toCharArray();
+        char[] charsTemp;
+
+        buffer =0 ;
 
         for (char c : chars) {
             for (Map.Entry<Character, String> pair : set) {
                 if (c == pair.getKey()) {
+                    charsTemp = pair.getValue().toCharArray();
+                    for (int i = 0; i < charsTemp.length; i++){
 
-                    try {
-                        //fileWriter.writer(pair.getValue() + " ");
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                        buffer = (byte) ((buffer << 1) + (('0' == charsTemp[i]) ? 0 : 1));
+                        if (i > 7){
+                            System.out.print(buffer);
+                            buffer = 0;
+                        }
                     }
+                    System.out.print(buffer);
+                    buffer = 0;
                 }
 
             }
