@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Set;
 
@@ -8,30 +11,68 @@ import java.util.Set;
 public class Uncompresion {
 
 
-    FileReader fileReader;
-    String string;
-    String[] mass;
 
     public Uncompresion() throws IOException {
 
-        fileReader = new FileReader("output.txt", 1);
-        string = fileReader.getString();
-        mass = string.split(" ");
 
-        System.out.println(Compresion.charCods);
+
+        byte[] array = Files.readAllBytes(Paths.get("output.txt"));
 
         Set<Map.Entry<Character, String>> entrySet = Compresion.charCods.entrySet();
 
+        int flag = 0;
 
-        for(String s: mass){
+
+
+        for (int i = 0; i < 10; i++)
+        System.out.println(String.format("%7s", Integer.toBinaryString(array[i])).replace(' ', '0'));
+
+        //System.out.println(String.format("%7s", Integer.toBinaryString(array[0])).replace(' ', '0'));
+
+
+        for(int i = 0; i < array.length; i++) {
 
             for (Map.Entry<Character, String> pair : entrySet) {
-                if (s.equals(pair.getValue())){
-                    System.out.print(pair.getKey());
+
+               /* if (flag == 1){
+                    i++;
                 }
+                if (flag == 2){
+                    i += 2;
+                }
+                String temp1 = String.format("%7s", Integer.toBinaryString(array[i])).replace(' ', '0');
+                //System.out.print(temp1);
+                String temp2;
+                if (temp1.equals(pair.getValue())) {
+                    System.out.print(pair.getKey());
+                    flag = 0;
+                } else {
+                    temp2 = String.format("%7s", Integer.toBinaryString(array[i + 1])).replace(' ', '0');
+                    temp1 += temp2;
+                    flag = 1;
+                    if (temp1.equals(pair.getValue())) {
+                        System.out.print(pair.getKey());
+                    } else {
+                        temp2 = String.format("%7s", Integer.toBinaryString(array[i + 2])).replace(' ', '0');
+                        temp1 += temp2;
+                        flag = 2;
+                        if (temp1.equals(pair.getValue())) {
+                            System.out.print(pair.getKey());
+                        }
+                    }
+                }*/
             }
         }
 
 
+    }
+
+
+    String toBinary( byte[] bytes )
+    {
+        StringBuilder sb = new StringBuilder(bytes.length * Byte.SIZE);
+        for( int i = 0; i < Byte.SIZE * bytes.length; i++ )
+            sb.append((bytes[i / Byte.SIZE] << i % Byte.SIZE & 0x80) == 0 ? '0' : '1');
+        return sb.toString();
     }
 }

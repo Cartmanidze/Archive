@@ -62,7 +62,7 @@ public class Compresion {
 
         print(treeList.get(0), "");
         System.out.print(charCods);
-       // new Uncompresion();
+        new Uncompresion();
 
         textGen(entrySet, CharFreq.text);
 
@@ -114,46 +114,45 @@ public class Compresion {
         char[] chars = s.toCharArray();
         char[] charsTemp;
 
-        buffer =0 ;
+        buffer = 0;
 
         for (char c : chars) {
             for (Map.Entry<Character, String> pair : set) {
                 if (c == pair.getKey()) {
                     charsTemp = pair.getValue().toCharArray();
-                    for (char chT: charsTemp){
+                    for (char chT : charsTemp) {
 
 
                         buffer = (byte) ((buffer << 1) + (('0' == chT) ? 0 : 1));
                         i++;
-                        if (i == 7){
+                        if (i == 7) {
                             //System.out.print(buffer);
                             try {
-                                fileWriter.writer(buffer);
-                            } catch (IOException e) {
+                                //fileWriter.writer(buffer);
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                             buffer = 0;
                             i = 0;
+
                         }
-                    }
-                    //System.out.print(buffer);
-                    try {
+                        //System.out.print(buffer);
+                    /*try {
                         fileWriter.writer(buffer);
                     } catch (IOException e) {
                         e.printStackTrace();
+                    }*/
+                        //buffer = 0;
                     }
-                    buffer = 0;
+
                 }
 
-            }
 
+            }
 
         }
 
     }
-
-
-
 }
 
 
