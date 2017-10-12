@@ -27,41 +27,29 @@ public class Uncompresion {
         for (int i = 0; i < 10; i++)
         System.out.println(String.format("%7s", Integer.toBinaryString(array[i])).replace(' ', '0'));
 
+        //System.out.println(toBinary(array));
+
         //System.out.println(String.format("%7s", Integer.toBinaryString(array[0])).replace(' ', '0'));
 
+        char[] chars = toBinary(array).toCharArray();
+        String temp = "";
+        int i = 0;
+        System.out.println(chars[2]);
 
-        for(int i = 0; i < array.length; i++) {
 
+        while (i < chars.length){
             for (Map.Entry<Character, String> pair : entrySet) {
-
-               /* if (flag == 1){
-                    i++;
-                }
-                if (flag == 2){
-                    i += 2;
-                }
-                String temp1 = String.format("%7s", Integer.toBinaryString(array[i])).replace(' ', '0');
-                //System.out.print(temp1);
-                String temp2;
-                if (temp1.equals(pair.getValue())) {
+                if (temp.equals(pair.getValue())) {
                     System.out.print(pair.getKey());
-                    flag = 0;
-                } else {
-                    temp2 = String.format("%7s", Integer.toBinaryString(array[i + 1])).replace(' ', '0');
-                    temp1 += temp2;
-                    flag = 1;
-                    if (temp1.equals(pair.getValue())) {
-                        System.out.print(pair.getKey());
-                    } else {
-                        temp2 = String.format("%7s", Integer.toBinaryString(array[i + 2])).replace(' ', '0');
-                        temp1 += temp2;
-                        flag = 2;
-                        if (temp1.equals(pair.getValue())) {
-                            System.out.print(pair.getKey());
-                        }
+                    temp = "";
+                    break;
+                    }else {
+
                     }
-                }*/
+                //System.out.println(temp);
             }
+            temp += chars[i];
+            i++;
         }
 
 
@@ -71,8 +59,8 @@ public class Uncompresion {
     String toBinary( byte[] bytes )
     {
         StringBuilder sb = new StringBuilder(bytes.length * Byte.SIZE);
-        for( int i = 0; i < Byte.SIZE * bytes.length; i++ )
-            sb.append((bytes[i / Byte.SIZE] << i % Byte.SIZE & 0x80) == 0 ? '0' : '1');
+        for( int i = 0; i < bytes.length; i++ )
+            sb.append(String.format("%7s", Integer.toBinaryString(bytes[i])).replace(' ', '0'));
         return sb.toString();
     }
 }
